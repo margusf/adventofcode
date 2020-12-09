@@ -1,0 +1,1 @@
+ocamlfind ocamlc -package batteries -linkpkg part1.ml -o part1
