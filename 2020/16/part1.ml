@@ -4,6 +4,8 @@ https://adventofcode.com/2020/day/16
 
 open Printf
 
+module IntMap = Map.Make(struct type t = int let compare = compare end)
+
 let input_test = ([
 ("class", [ (1, 3); (5, 7)]);
 ("row", [ (6, 11); (33, 44)]);

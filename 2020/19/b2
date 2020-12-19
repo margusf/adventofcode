@@ -1,0 +1,1 @@
+ocamlfind ocamlc -linkpkg part2.ml -o part2
