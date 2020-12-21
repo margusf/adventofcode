@@ -1912,6 +1912,17 @@ let solve input =
     let rotate_pos edge_pos rotate_count =
         (edge_pos + rotate_count) mod 8 in
 
+    let rotate_starting_corner corner image_map =
+        let exists_edge edge image_map =
+            BatEnum.exists (fun edges -> BatList.exists ((=) edge) edges) (BatMap.values image_map) in
+
+        let corner_edges = BatMap.find corner image_map in
+        let without_corner = BatMap.remove corner image_map in
+        let (idx, _) = BatList.findi
+                (fun idx edge -> exists_edge edge without_corner)
+                corner_edges in
+        rotate_pos idx 6 in
+
     let make_composite_image image_dim starting_corner =
         let rec make_row_rest image_map left_edge =
             (image_map, []) in (*TODO*)
@@ -1939,8 +1950,10 @@ let solve input =
         (* TODO: rotate first element so that the top element actually connects to something. *)
         printf "\n\nMAKE COMPOSITE\n\n";
         let image_map = make_image_map () in
+        let starting_rotation = rotate_starting_corner starting_corner image_map in
+        printf "Starting rotation = %d\n" starting_rotation;
         let starting_edges = BatMap.find starting_corner image_map in
-        let starting_up_edge = List.hd starting_edges in
+        let starting_up_edge = List.nth starting_edges starting_rotation in
         let images = rearrange_images image_map starting_up_edge image_dim in
         combine_images images in
 
