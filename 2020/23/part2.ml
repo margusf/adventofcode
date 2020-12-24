@@ -1,5 +1,5 @@
 (*
-https://adventofcode.com/2020/day/22
+https://adventofcode.com/2020/day/23
 *)
 
 open Printf
